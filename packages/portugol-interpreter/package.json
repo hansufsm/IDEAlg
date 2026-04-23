@@ -1,12 +1,13 @@
 {
-  "name": "@australis/portugol-interpreter",
+  "name": "portugol-interpreter",
   "version": "1.0.0",
+  "description": "A TypeScript interpreter for Portugol (Portuguese pseudocode compatible with VisuAlg)",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
     }
   },
   "scripts": {
@@ -15,6 +16,23 @@
     "test": "jest --passWithNoTests",
     "type-check": "tsc --noEmit"
   },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hansufsm/idealg.git",
+    "directory": "packages/portugol-interpreter"
+  },
+  "keywords": [
+    "portugol",
+    "visualg",
+    "interpreter",
+    "pseudocode",
+    "portuguese"
+  ],
+  "author": "Hans",
+  "license": "MIT",
   "devDependencies": {
     "@types/jest": "^29.5.14",
     "jest": "^29.7.0",
