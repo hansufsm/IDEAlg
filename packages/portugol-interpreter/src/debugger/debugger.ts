@@ -20,7 +20,6 @@ export interface DebuggerEvent {
 export class PortugolDebugger {
   private interpreter: Interpreter;
   private state: DebuggerState = "idle";
-  private stepResolve?: () => void;
   private stepQueue: Array<() => void> = [];
   private output = "";
   private eventListeners: Array<(event: DebuggerEvent) => void> = [];

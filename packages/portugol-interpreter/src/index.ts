@@ -2,14 +2,13 @@
 // AUSTRALIS – Portugol Interpreter – Public API
 // ============================================================
 
-import { Lexer, LexerError } from "./lexer/lexer";
-import { Parser, ParseError } from "./parser/parser";
+import { Lexer } from "./lexer/lexer";
+import { Parser } from "./parser/parser";
 import {
    Interpreter,
    IOInterface,
    ExecutionResult,
 } from "./interpreter/interpreter";
-import { PortugolDebugger } from "./debugger/debugger";
 import { ProgramNode } from "./parser/ast";
 
 export { LexerError } from "./lexer/lexer";
