@@ -94,16 +94,16 @@ export function IDEDocPanel() {
   return (
     <div
       className="h-full flex flex-col"
-      style={{ background: "var(--surface)", fontFamily: "var(--font-mono)" }}
+      style={{ background: "var(--bg-panel)", color: "var(--text-main)", fontFamily: "var(--font-mono)" }}
     >
       {/* Header */}
       <div
         className="px-3 py-2 border-b flex-shrink-0"
-        style={{ borderColor: "var(--border)" }}
+        style={{ borderColor: "var(--border-color)" }}
       >
         <span
           className="text-xs font-bold"
-          style={{ color: "#38bdf8", letterSpacing: "0.05em" }}
+          style={{ color: "var(--accent-primary)", letterSpacing: "0.05em" }}
         >
           📖 DOCUMENTAÇÃO
         </span>
@@ -112,7 +112,7 @@ export function IDEDocPanel() {
       {/* Tabs */}
       <div
         className="flex border-b flex-shrink-0"
-        style={{ borderColor: "var(--border)" }}
+        style={{ borderColor: "var(--border-color)" }}
       >
         {(["functions", "syntax"] as const).map((t) => (
           <button
@@ -120,8 +120,8 @@ export function IDEDocPanel() {
             onClick={() => setTab(t)}
             className="flex-1 py-1.5 text-xs transition-colors"
             style={{
-              color: tab === t ? "#38bdf8" : "var(--muted)",
-              borderBottom: tab === t ? "2px solid #38bdf8" : "2px solid transparent",
+              color: tab === t ? "var(--accent-primary)" : "var(--muted)",
+              borderBottom: tab === t ? "2px solid var(--accent-primary)" : "2px solid transparent",
               background: "transparent",
             }}
           >
@@ -133,23 +133,23 @@ export function IDEDocPanel() {
       {tab === "functions" ? (
         <>
           {/* Search */}
-          <div className="px-2 py-1.5 border-b flex-shrink-0" style={{ borderColor: "var(--border)" }}>
+          <div className="px-2 py-1.5 border-b flex-shrink-0" style={{ borderColor: "var(--border-color)" }}>
             <input
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Buscar função…"
               className="w-full text-xs rounded px-2 py-1 outline-none"
               style={{
-                background: "var(--bg)",
-                border: "1px solid var(--border)",
-                color: "var(--text)",
+                background: "var(--bg-input)",
+                border: "1px solid var(--border-color)",
+                color: "var(--text-main)",
                 fontFamily: "var(--font-mono)",
               }}
             />
           </div>
 
           {/* Category filter */}
-          <div className="flex gap-1 px-2 py-1 overflow-x-auto flex-shrink-0" style={{ borderBottom: "1px solid var(--border)" }}>
+          <div className="flex gap-1 px-2 py-1 overflow-x-auto flex-shrink-0" style={{ borderBottom: "1px solid var(--border-color)" }}>
             {["Todos", ...CATEGORIES].map((cat) => (
               <button
                 key={cat}
@@ -158,13 +158,13 @@ export function IDEDocPanel() {
                 style={{
                   background:
                     selectedCategory === cat
-                      ? "rgba(56,189,248,0.15)"
+                      ? "var(--accent-faded)"
                       : "transparent",
                   color:
-                    selectedCategory === cat ? "#38bdf8" : "var(--muted)",
+                    selectedCategory === cat ? "var(--accent-primary)" : "var(--muted)",
                   border:
                     selectedCategory === cat
-                      ? "1px solid rgba(56,189,248,0.3)"
+                      ? "1px solid var(--accent-border)"
                       : "1px solid transparent",
                 }}
               >
@@ -180,8 +180,8 @@ export function IDEDocPanel() {
                 key={`${doc.name}-${doc.signature}`}
                 className="rounded-lg overflow-hidden"
                 style={{
-                  border: "1px solid var(--border)",
-                  background: "rgba(9,9,15,0.4)",
+                  border: "1px solid var(--border-color)",
+                  background: "var(--bg-card)",
                 }}
               >
                 <button
@@ -195,7 +195,7 @@ export function IDEDocPanel() {
                   <div className="flex items-center gap-2 min-w-0">
                     <span
                       className="text-xs font-bold flex-shrink-0"
-                      style={{ color: "#38bdf8" }}
+                      style={{ color: "var(--accent-primary)" }}
                     >
                       {doc.name}
                     </span>
@@ -216,19 +216,19 @@ export function IDEDocPanel() {
                 {expanded === doc.signature && (
                   <div
                     className="px-3 pb-3 space-y-2"
-                    style={{ borderTop: "1px solid var(--border)" }}
+                    style={{ borderTop: "1px solid var(--border-color)" }}
                   >
                     <p
                       className="text-xs mt-2"
-                      style={{ color: "var(--text-dim)", lineHeight: 1.6 }}
+                      style={{ color: "var(--muted)", lineHeight: 1.6 }}
                     >
                       {doc.description}
                     </p>
                     <div
                       className="rounded px-2 py-1.5"
                       style={{
-                        background: "var(--bg)",
-                        border: "1px solid var(--border)",
+                        background: "var(--bg-code-block)",
+                        border: "1px solid var(--border-color)",
                       }}
                     >
                       <div

@@ -4,7 +4,16 @@ export const dynamic = "force-dynamic";
 
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
+interface Project {
+  _id: string;
+  title: string;
+  description?: string;
+  code: string;
+  updatedAt: number;
+  isPublic: boolean;
+}
 
 function timeAgo(ts: number): string {
   const diff = Date.now() - ts;
@@ -19,26 +28,34 @@ function timeAgo(ts: number): string {
 
 export default function ProjectsPage() {
   const router = useRouter();
-  // Mock data for Convex removal
-  const projects: any[] = [];
-  const deleteProject = async (args: any) => {};
-  const shareProject = async (args: any) => "mock-slug";
+  
+  const [projects, setProjects] = useState<Project[] | undefined>(undefined);
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const [shareLinks, setShareLinks] = useState<Record<string, string>>({});
+
+  // Simulação de busca de dados (Substituir pela API real futuramente)
+  useEffect(() => {
+    const timer = setTimeout(() => setProjects([]), 800);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const deleteProject = async ({ projectId }: { projectId: string }) => {};
+  const shareProject = async ({ projectId }: { projectId: string }) => "mock-slug";
+
   const ideUrl = typeof window !== "undefined" ? window.location.origin : "";
 
   const handleDelete = async (id: string) => {
     if (!confirm("Tem certeza que deseja excluir este projeto?")) return;
     setDeletingId(id);
     try {
-      await deleteProject({ projectId: id as any });
+      await deleteProject({ projectId: id });
     } finally {
       setDeletingId(null);
     }
   };
 
   const handleShare = async (id: string) => {
-    const slug = await shareProject({ projectId: id as any });
+    const slug = await shareProject({ projectId: id });
     setShareLinks((prev) => ({ ...prev, [id]: slug }));
   };
 
@@ -75,7 +92,7 @@ export default function ProjectsPage() {
           </div>
         ) : (
           <div className="grid md:grid-cols-2 gap-4">
-            {projects.map((p: any) => (
+            {projects.map((p) => (
               <div key={p._id} className="rounded-xl border p-5 flex flex-col gap-3"
                 style={{ background: "var(--surface)", borderColor: "var(--border)" }}>
                 <div className="flex items-start justify-between">

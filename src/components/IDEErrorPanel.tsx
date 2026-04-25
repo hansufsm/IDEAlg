@@ -19,7 +19,7 @@ interface IDEErrorPanelProps {
   onDismiss: () => void;
 }
 
-interface ParsedError {
+export interface ParsedError {
   message: string;
   line?: number;
   column?: number;
