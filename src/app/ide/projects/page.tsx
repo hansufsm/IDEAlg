@@ -64,7 +64,7 @@ export default function ProjectsPage() {
       <header className="border-b px-6 py-3 flex items-center justify-between"
         style={{ borderColor: "var(--border)", background: "var(--surface)" }}>
         <Link href="/ide" className="font-mono font-bold text-lg" style={{ color: "var(--accent)" }}>
-          ✦ AUSTRALIS IDE
+          ✦ IDEALG
         </Link>
         <div className="flex items-center gap-3">
           <Link href="/ide" className="ide-btn ide-btn-primary text-xs">

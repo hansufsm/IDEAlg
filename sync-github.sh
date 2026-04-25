@@ -10,7 +10,7 @@ BLUE='\033[0;34m'
 RED='\033[0;31m'
 NC='\033[0m' # No Color
 
-echo -e "${BLUE}✦ Iniciando sincronização Australis IDE...${NC}"
+echo -e "${BLUE}✦ Iniciando sincronização IDEALG - IDE Didática para Portugol...${NC}"
 
 # 1. Verificação de dependências
 echo -e "${BLUE}1/5 Verificando dependências...${NC}"
@@ -69,7 +69,7 @@ git commit -m "$FULL_MSG"
 
 CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 if git push origin "$CURRENT_BRANCH"; then
-    echo -e "${GREEN}✦ Australis IDE atualizada com sucesso no GitHub!${NC}"
+    echo -e "${GREEN}✦ IDEALG - IDE Didática para Portugol atualizada com sucesso no GitHub!${NC}"
 else
     echo -e "${RED}✗ Falha no push. Verifique sua conexão ou autenticação.${NC}"
     exit 1

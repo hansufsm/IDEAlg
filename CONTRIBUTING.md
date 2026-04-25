@@ -1,6 +1,6 @@
-# Contribuindo para Australis IDE
+# Contribuindo para IDEALG
 
-Obrigado por seu interesse em melhorar a Australis IDE! Para manter a qualidade do código "world-class", seguimos estas diretrizes.
+Obrigado por seu interesse em melhorar a IDEALG! Para manter a qualidade do código "world-class", seguimos estas diretrizes.
 
 ## 🛠 Fluxo de Desenvolvimento
 

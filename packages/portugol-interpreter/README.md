@@ -1,6 +1,6 @@
 # @australis/portugol-interpreter
 
-O motor de execução de Portugol para a Australis IDE. Este pacote é responsável por transformar código fonte em texto em uma Árvore de Sintaxe Abstrata (AST) e executá-la de forma segura no ambiente JavaScript.
+O motor de execução de Portugol para a IDEALG. Este pacote é responsável por transformar código fonte em texto em uma Árvore de Sintaxe Abstrata (AST) e executá-la de forma segura no ambiente JavaScript.
 
 ## 📦 Instalação
 

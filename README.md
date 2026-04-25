@@ -1,6 +1,6 @@
-# Australis IDE ✦ 🚀
+# IDEALG - IDE Didática para Portugol ✦ 🚀
 
-Uma IDE web moderna e intuitiva para programação em **Portugol**, desenvolvida com **Next.js 14** e **TypeScript**. Este projeto visa democratizar o aprendizado de lógica de programação através de uma interface de alta performance e ferramentas robustas de execução.
+Uma IDE web moderna e intuitiva para programação em **Portugol**, desenvolvida com **Next.js 14** e **TypeScript**. Este projeto visa democratizar o aprendizado de lógica de programação através de uma interface de alta performance e ferramentas robustas de execução, com foco no ensino de algoritmos.
 
 ## 🚀 Funcionalidades
 
