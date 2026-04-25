@@ -5,6 +5,7 @@ export const dynamic = "force-dynamic";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { useTheme } from "../../../../packages/portugol-interpreter/ThemeContext";
 
 interface Project {
   _id: string;
@@ -28,6 +29,7 @@ function timeAgo(ts: number): string {
 
 export default function ProjectsPage() {
   const router = useRouter();
+  const { theme, toggleTheme } = useTheme();
   
   const [projects, setProjects] = useState<Project[] | undefined>(undefined);
   const [deletingId, setDeletingId] = useState<string | null>(null);
@@ -67,6 +69,13 @@ export default function ProjectsPage() {
           ✦ IDEALG
         </Link>
         <div className="flex items-center gap-3">
+          <button
+            onClick={toggleTheme}
+            className="ide-btn ide-btn-ghost p-2"
+            title="Alternar Tema"
+          >
+            {theme.mode === "dark" ? "☀️" : "🌙"}
+          </button>
           <Link href="/ide" className="ide-btn ide-btn-primary text-xs">
             + Novo Projeto
           </Link>
