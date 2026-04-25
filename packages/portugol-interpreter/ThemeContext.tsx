@@ -1,7 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, ReactNode, useEffect } from 'react';
-import { useLocalStorage } from '../hooks/useLocalStorage';
+import { useLocalStorage } from './useLocalStorage';
 import { ThemeSettings } from '../types/theme';
 
 interface ThemeContextType {
