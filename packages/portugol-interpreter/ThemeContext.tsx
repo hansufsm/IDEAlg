@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, ReactNode, useEffect } from 'react';
 import { useLocalStorage } from './useLocalStorage';
-import { ThemeSettings } from '../types/theme';
+import { ThemeSettings } from './theme';
 
 interface ThemeContextType {
   theme: ThemeSettings;
