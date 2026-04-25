@@ -1,6 +1,6 @@
 # Biblioteca Padrão Portugol (StdLib)
 
-Este documento descreve as funções built-in suportadas pelo interpretador da Australis IDE, seguindo a compatibilidade com o VisuAlg 3.0.
+Este documento descreve as funções built-in suportadas pelo interpretador da IDEALG, seguindo a compatibilidade com o VisuAlg 3.0.
 
 ## 🧮 Matemática
 

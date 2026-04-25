@@ -4,8 +4,8 @@ export const dynamic = "force-dynamic";
 
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { useState, useEffect } from "react";
-import { useTheme } from "../../../../packages/portugol-interpreter/ThemeContext";
+import { useState, useEffect } from "react"; 
+import { useTheme } from "@/contexts/ThemeContext"; // Ajuste de importação
 
 interface Project {
   _id: string;
