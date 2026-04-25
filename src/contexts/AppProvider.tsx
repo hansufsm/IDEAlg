@@ -1,7 +1,7 @@
 "use client";
 
 import { ReactNode } from "react";
-import { ThemeProvider } from "../contexts/ThemeContext"; // Ajuste de importação
+import { ThemeProvider } from "./ThemeContext"; // Ajuste de importação
 
 /**
  * AppProvider
