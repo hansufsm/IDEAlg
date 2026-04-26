@@ -1,7 +1,8 @@
 # IDEALG — IDE Online de Portugol
 
 [![Site](https://img.shields.io/badge/Site-online-brightgreen)](https://hansufsm.github.io/IDEAlg)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
+[![License: MIT](https://img.shields.io/badge/Code-MIT-yellow.svg)](./LICENSE)
+[![License: CC BY 4.0](https://img.shields.io/badge/Content-CC%20BY%204.0-blue.svg)](./LICENSE.CC)
 [![Next.js](https://img.shields.io/badge/Next.js-15-black?logo=next.js)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)](https://www.typescriptlang.org/)
 

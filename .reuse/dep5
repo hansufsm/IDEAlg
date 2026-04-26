@@ -1,0 +1,34 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: IDEAlg
+Upstream-Contact: Hans <hans@ufsm.br>
+Source: https://github.com/hansufsm/IDEAlg
+
+# Code - MIT License
+Files: src/** *.ts *.tsx next.config.js tsconfig.json vitest.config.ts
+Copyright: 2026 hansufsm
+License: MIT
+
+# Documentation and Examples - CC BY 4.0
+Files: docs/** exemplos/** README.md CONTRIBUTING.md
+Copyright: 2026 hansufsm
+License: CC-BY-4.0
+
+# Configuration files - MIT License
+Files: .github/** .env.example .gitignore .npmrc
+Copyright: 2026 hansufsm
+License: MIT
+
+# Public assets - CC BY 4.0
+Files: public/**
+Copyright: 2026 hansufsm
+License: CC-BY-4.0
+
+# Package files - MIT License
+Files: package.json package-lock.json
+Copyright: 2026 hansufsm
+License: MIT
+
+# License files
+Files: LICENSE LICENSE.CC LICENSING.md
+Copyright: 2026 hansufsm
+License: CC0-1.0

@@ -27,3 +27,18 @@ npm test
 ```
 
 Certifique-se de que nenhum teste existente quebrou (Regressão).
+
+## 📜 Licenças
+
+O IDEAlg usa **duas licenças complementares**:
+
+- **MIT License** — Código-fonte (`.ts`, `.tsx`, scripts)
+- **Creative Commons BY 4.0** — Documentação, exemplos e materiais educacionais
+
+Ao contribuir:
+
+- ✅ Novo código segue **MIT**
+- ✅ Novos exemplos/docs seguem **CC BY 4.0**
+- ✅ Você consente que suas contribuições sejam licenciadas sob estas licenças
+
+Para detalhes, veja [LICENSING.md](./LICENSING.md).
