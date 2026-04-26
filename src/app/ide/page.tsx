@@ -1,9 +1,9 @@
 "use client";
-export const dynamic = "force-dynamic";
 
 import dynamicImport from "next/dynamic";
 import { useState, useCallback, useEffect, useRef } from "react";
 import Link from "next/link";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { IDETerminalEnhanced } from "@/components/IDETerminalEnhanced";
 import { VariableInspectorEnhanced } from "@/components/VariableInspectorEnhanced";
 import { IDEErrorPanel } from "@/components/IDEErrorPanel";
@@ -106,6 +106,21 @@ export default function IDEPage() {
   useEffect(() => {
     const t = setTimeout(() => setMounted(true), 40);
     return () => clearTimeout(t);
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const params = new URLSearchParams(window.location.search);
+    const encoded = params.get('code');
+    if (encoded) {
+      try {
+        const decoded = decodeURIComponent(escape(atob(encoded)));
+        setCode(decoded);
+        setProjectTitle('Código compartilhado');
+      } catch (e) {
+        // Ignora código inválido
+      }
+    }
   }, []);
 
   useEffect(() => {
@@ -249,10 +264,13 @@ export default function IDEPage() {
     [setCurrentProjectId, resetMode, clearConsole, showNotification],
   );
 
+  const ideUrl = typeof window !== "undefined" ? window.location.origin : "";
+
   const handleShare = useCallback(async () => {
-    const slug = Math.random().toString(36).slice(2, 9);
-    setShareSlug(slug);
-  }, []);
+    const encoded = btoa(unescape(encodeURIComponent(code)));
+    const shareUrl = `${ideUrl}/ide?code=${encoded}`;
+    setShareSlug(shareUrl);
+  }, [code, ideUrl]);
 
   const handleInsertSnippet = useCallback((text: string) => {
     setCode((prev) => prev + "\n" + text);
@@ -261,8 +279,6 @@ export default function IDEPage() {
   const handleGoToLine = useCallback((_line: number) => {
     // Monaco goToLine via ref — future enhancement
   }, []);
-
-  const ideUrl = typeof window !== "undefined" ? window.location.origin : "";
 
   // Status config
   const statusConfig: Record<string, { label: string; color: string; dot: string; pulse?: boolean }> = {
@@ -536,6 +552,7 @@ export default function IDEPage() {
 
             {/* Utilities */}
             <div className="flex items-center gap-1">
+              <ThemeToggle />
               <button onClick={() => handleDownload("por")} className="ide-btn ide-btn-ghost" title="Baixar .por">⬇ .por</button>
               <button onClick={handleCopy} className="ide-btn ide-btn-ghost" title="Copiar código">⎘ Copiar</button>
               <button onClick={handleShare} className="ide-btn ide-btn-ghost" title="Compartilhar">🔗</button>
@@ -690,13 +707,13 @@ export default function IDEPage() {
             <div className="flex gap-2 mb-4">
               <input
                 readOnly
-                value={`${ideUrl}/ide/shared/${shareSlug}`}
-                className="flex-1 rounded-lg px-3 py-2 text-xs outline-none"
-                style={{ background: "var(--bg)", border: "1px solid var(--border)", color: "var(--accent)", fontSize: 14 }}
+                value={shareSlug}
+                className="flex-1 rounded-lg px-3 py-2 text-xs outline-none overflow-x-auto"
+                style={{ background: "var(--bg)", border: "1px solid var(--border)", color: "var(--accent)", fontSize: 12 }}
               />
               <button
-                onClick={() => navigator.clipboard.writeText(`${ideUrl}/ide/shared/${shareSlug}`)}
-                className="px-3 py-2 rounded-lg text-xs"
+                onClick={() => navigator.clipboard.writeText(shareSlug)}
+                className="px-3 py-2 rounded-lg text-xs flex-shrink-0"
                 style={{ background: "rgba(0,212,255,0.15)", color: "var(--accent)" }}
               >
                 Copiar
