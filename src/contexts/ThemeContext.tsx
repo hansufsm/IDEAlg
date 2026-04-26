@@ -26,7 +26,7 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   };
 
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme.mode);
+    document.documentElement.classList.toggle('dark', theme.mode === 'dark');
   }, [theme.mode]);
 
   return (

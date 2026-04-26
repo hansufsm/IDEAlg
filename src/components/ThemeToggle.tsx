@@ -1,41 +1,36 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useTheme } from "@/contexts/ThemeContext";
 
 export function ThemeToggle() {
-  const [theme, setTheme] = useState<"light" | "dark">("dark");
-
-  useEffect(() => {
-    const root = window.document.documentElement;
-    if (theme === "dark") {
-      root.classList.add("dark");
-      root.style.setProperty("--accent-primary", "#F6821F");
-    } else {
-      root.classList.remove("dark");
-      root.style.setProperty("--accent-primary", "#0051AD"); // Azul Cloudflare para modo claro
-    }
-  }, [theme]);
+  const { theme, toggleTheme } = useTheme();
 
   return (
-    <div className="flex bg-slate-100 dark:bg-[#262626] p-1 rounded-full border border-slate-200 dark:border-[#3D3D3D] shadow-sm">
+    <div className="flex items-center gap-1 bg-white/5 dark:bg-white/5 p-1 rounded-lg border border-white/10">
       <button
-        onClick={() => setTheme("light")}
-        className={`px-4 py-1 rounded-full text-xs font-semibold transition-all ${
-          theme === "light"
-            ? "bg-white text-blue-600 shadow-sm"
-            : "text-slate-500 hover:text-slate-700 dark:text-slate-400"
+        onClick={() => {
+          if (theme.mode !== "light") toggleTheme();
+        }}
+        className={`px-2 py-1 rounded text-xs font-medium transition-all flex items-center gap-1 ${
+          theme.mode === "light"
+            ? "bg-white/20 text-slate-900 dark:text-white"
+            : "text-slate-500 hover:text-slate-400"
         }`}
+        title="Tema claro"
       >
-        CLARO
+        ☀️
       </button>
       <button
-        onClick={() => setTheme("dark")}
-        className={`px-4 py-1 rounded-full text-xs font-semibold transition-all ${
-          theme === "dark"
-            ? "bg-[#F6821F] text-white shadow-sm"
-            : "text-slate-500 hover:text-slate-700 dark:text-slate-400"
+        onClick={() => {
+          if (theme.mode !== "dark") toggleTheme();
+        }}
+        className={`px-2 py-1 rounded text-xs font-medium transition-all flex items-center gap-1 ${
+          theme.mode === "dark"
+            ? "bg-white/20 text-white"
+            : "text-slate-500 hover:text-slate-400"
         }`}
+        title="Tema escuro"
       >
-        ESCURO
+        🌙
       </button>
     </div>
   );
