@@ -1,0 +1,114 @@
+{
+  "skill_id": "hansufsm-project-suite",
+  "skill_name": "Hans's Project Skills",
+  "version": "1.0.0",
+  "author": "Hans (hansufsm)",
+  "email": "hans@ufsm.br",
+  "description": "Suite de skills para manutenção de projetos — Validação, documentação, build",
+  "category": "project-management",
+  "global": true,
+  "enabled": true,
+  "skills": [
+    {
+      "id": "validate",
+      "name": "🔍 Validate Project",
+      "description": "Valida estado do projeto — arquivos, git, dependencies, build",
+      "command": "$SKILLS_DIR/project-validator.sh",
+      "category": "validation",
+      "shortcut": "ctrl+shift+v",
+      "tags": ["validation", "health-check", "universal"],
+      "compatible_with": ["Node.js", "Python", "Go", "Any"]
+    },
+    {
+      "id": "idealg-validate",
+      "name": "🔍 IDEAlg Validate",
+      "description": "Valida repositório IDEAlg específico — arquivos, exemplos, configuração",
+      "command": "./.claude/skill-validate-quick.sh",
+      "category": "validation",
+      "shortcut": "ctrl+shift+alt+v",
+      "tags": ["idealg", "portugol", "educational"],
+      "compatible_with": ["IDEAlg"],
+      "project": "IDEAlg"
+    },
+    {
+      "id": "idealg-config",
+      "name": "⚙️ IDEAlg Config",
+      "description": "Mostra configuração do projeto IDEAlg",
+      "command": "cat ./.claude/skill-config.json | jq '.'",
+      "category": "info",
+      "shortcut": "ctrl+shift+alt+c",
+      "tags": ["idealg", "config", "info"],
+      "compatible_with": ["IDEAlg"],
+      "project": "IDEAlg"
+    },
+    {
+      "id": "git-status",
+      "name": "📊 Git Status",
+      "description": "Mostra status do repositório git — branch, commits, diffs",
+      "command": "echo '=== Git Status ===' && git status && echo '' && echo '=== Recent Commits ===' && git log --oneline -5",
+      "category": "git",
+      "shortcut": "ctrl+shift+g",
+      "tags": ["git", "status", "universal"]
+    },
+    {
+      "id": "npm-audit",
+      "name": "🔐 Security Audit",
+      "description": "Verifica vulnerabilidades em dependências npm",
+      "command": "npm audit --audit-level=moderate",
+      "category": "security",
+      "tags": ["npm", "security", "dependencies"],
+      "compatible_with": ["Node.js"]
+    },
+    {
+      "id": "type-check",
+      "name": "✓ Type Check",
+      "description": "Valida TypeScript sem compilar",
+      "command": "tsc --noEmit",
+      "category": "validation",
+      "tags": ["typescript", "validation"],
+      "compatible_with": ["Node.js (TypeScript)"]
+    }
+  ],
+  "keyboard_shortcuts": {
+    "ctrl+shift+v": "Validate Project",
+    "ctrl+shift+g": "Git Status",
+    "ctrl+shift+alt+v": "IDEAlg Validate",
+    "ctrl+shift+alt+c": "IDEAlg Config"
+  },
+  "profiles": {
+    "idealg": {
+      "name": "IDEAlg Development",
+      "description": "Profile para desenvolvimento do IDEAlg",
+      "enabled_skills": ["validate", "idealg-validate", "idealg-config", "git-status"],
+      "shortcuts": {
+        "ctrl+shift+v": "idealg-validate",
+        "ctrl+shift+g": "git-status"
+      }
+    },
+    "universal": {
+      "name": "Universal Project",
+      "description": "Skills universais para qualquer projeto",
+      "enabled_skills": ["validate", "git-status", "npm-audit", "type-check"],
+      "shortcuts": {
+        "ctrl+shift+v": "validate",
+        "ctrl+shift+g": "git-status"
+      }
+    }
+  },
+  "installation": {
+    "location": "~/.claude/skills/",
+    "config_location": "~/.claude/skill-template.json",
+    "settings_location": ".claude/settings.json (per project)"
+  },
+  "how_to_use": {
+    "step_1": "Copie este arquivo para ~/.claude/skill-template.json",
+    "step_2": "Em cada projeto, crie .claude/settings.json com skills específicas",
+    "step_3": "Use Ctrl+Shift+V (ou seu atalho) para executar",
+    "step_4": "Customize comandos conforme necessário"
+  },
+  "advanced": {
+    "custom_commands": "Você pode criar novos skills adicionando objetos à array 'skills'",
+    "variables": "$SKILLS_DIR referencia ~/.claude/skills/",
+    "environment": "Skills herdam variáveis de ambiente do terminal"
+  }
+}
