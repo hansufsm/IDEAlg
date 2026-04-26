@@ -1,0 +1,148 @@
+{
+  "skill_id": "idealg-maintenance",
+  "skill_name": "IDEAlg Maintenance",
+  "skill_version": "1.0.0",
+  "project_name": "IDEAlg",
+  "repository": "https://github.com/hansufsm/IDEAlg",
+  "language": "pt-BR",
+  "maintained_by": "hansufsm",
+  "last_updated": "2026-04-25",
+  "description": "Gerenciador automático para validação, testes, documentação e deploy do IDEAlg",
+  "commands": {
+    "build": "npm run build",
+    "dev": "npm run dev",
+    "test": "npm test",
+    "test_watch": "npm run test:watch",
+    "lint": "next lint",
+    "type_check": "tsc --noEmit",
+    "format": "prettier --write .",
+    "clean": "rm -rf .next node_modules package-lock.json && npm install"
+  },
+  "example_categories": [
+    "básico",
+    "controle",
+    "vetores",
+    "funções",
+    "constantes",
+    "física"
+  ],
+  "example_difficulties": [
+    "iniciante",
+    "intermediário",
+    "avançado"
+  ],
+  "github": {
+    "owner": "hansufsm",
+    "repo": "IDEAlg",
+    "pages_enabled": true,
+    "pages_url": "https://hansufsm.github.io/IDEAlg",
+    "branch_main": "main",
+    "branch_deploy": "gh-pages"
+  },
+  "licensing": {
+    "code": {
+      "type": "MIT",
+      "file": "LICENSE",
+      "applies_to": ["src/**/*.ts", "src/**/*.tsx", "*.js", "*.json", ".github/**"]
+    },
+    "content": {
+      "type": "CC-BY-4.0",
+      "file": "LICENSE.CC",
+      "applies_to": ["docs/**", "exemplos/**", "*.md"]
+    },
+    "reuse_compliant": true
+  },
+  "stack": {
+    "framework": "Next.js",
+    "framework_version": "15.x",
+    "react_version": "19.x",
+    "typescript_version": "5.6.x",
+    "styling": "Tailwind CSS",
+    "editor": "Monaco Editor",
+    "interpreter": "Portugol Interpreter (custom)"
+  },
+  "directories": {
+    "source": "src/",
+    "examples": "exemplos/",
+    "docs": "docs/",
+    "components": "src/components/",
+    "pages": "src/app/",
+    "contexts": "src/contexts/",
+    "hooks": "src/lib/",
+    "interpreter": "packages/portugol-interpreter/src/",
+    "tests": "src/",
+    "github_workflows": ".github/workflows/"
+  },
+  "validation": {
+    "required_files": [
+      "LICENSE",
+      "LICENSE.CC",
+      "README.md",
+      "LICENSING.md",
+      "CONTRIBUTING.md",
+      "next.config.js",
+      ".github/workflows/deploy.yml",
+      ".github/ISSUE_TEMPLATE/bug_report.md",
+      ".github/ISSUE_TEMPLATE/feature_request.md",
+      "docs/REFERENCIA.md",
+      "public/favicon.svg"
+    ],
+    "required_example_count": 5,
+    "minimum_example_files": [
+      "exemplos/01-ola-mundo.por",
+      "exemplos/02-variaveis.por",
+      "exemplos/03-se-senao.por",
+      "exemplos/04-enquanto.por",
+      "exemplos/05-vetor.por"
+    ]
+  },
+  "seo": {
+    "title": "IDEAlg - IDE Online de Portugol",
+    "description": "Aprenda lógica de programação com Portugol direto no navegador. IDE gratuita usada na UFSM.",
+    "keywords": ["portugol", "algoritmos", "ufsm", "education", "ide", "programação"],
+    "language": "pt_BR",
+    "favicon": "public/favicon.svg"
+  },
+  "theme": {
+    "dark_mode_strategy": "tailwind_class",
+    "light_css_selector": ".light",
+    "dark_css_selector": ".dark",
+    "color_palette": {
+      "primary": "#7c3aed",
+      "secondary": "#a78bfa",
+      "accent": "#38bdf8",
+      "error": "#f87171",
+      "success": "#34d399",
+      "warning": "#fbbf24"
+    }
+  },
+  "git": {
+    "convention": "conventional_commits",
+    "allowed_types": ["feat", "fix", "docs", "style", "refactor", "test", "chore"],
+    "sign_commits": false,
+    "require_pr_review": false,
+    "branch_protection": false
+  },
+  "deploy": {
+    "platform": "GitHub Pages",
+    "workflow": ".github/workflows/deploy.yml",
+    "build_command": "npm run build",
+    "build_output_dir": ".next",
+    "environment_url": "https://hansufsm.github.io/IDEAlg"
+  },
+  "monitoring": {
+    "health_check_interval_minutes": 60,
+    "alert_on_build_failure": true,
+    "alert_on_missing_files": true,
+    "alert_on_stale_docs": true
+  },
+  "features": {
+    "dark_mode": true,
+    "url_code_sharing": true,
+    "project_persistence": "localStorage",
+    "example_selection": true,
+    "variable_inspector": true,
+    "breakpoint_debugging": true,
+    "error_diagnostics": true
+  }
+}
