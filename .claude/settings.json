@@ -1,0 +1,72 @@
+{
+  "profile": "idealg-dev",
+  "language": "pt-BR",
+  "theme": "auto",
+  "custom_skills": [
+    {
+      "id": "idealg:validate",
+      "name": "IDEAlg Validate",
+      "description": "Valida o estado completo do repositório (arquivos, exemplos, config)",
+      "command": "./.claude/skill-validate-quick.sh",
+      "category": "project",
+      "shortcut": "ctrl+shift+v",
+      "show_output": true
+    },
+    {
+      "id": "idealg:validate-full",
+      "name": "IDEAlg Full Validate",
+      "description": "Validação completa incluindo build e TypeScript (mais lento)",
+      "command": "./.claude/skill-validate.sh",
+      "category": "project",
+      "show_output": true
+    },
+    {
+      "id": "idealg:config",
+      "name": "IDEAlg Config",
+      "description": "Mostra configuração da skill (stack, diretórios, etc)",
+      "command": "cat ./.claude/skill-config.json | jq '.'",
+      "category": "project",
+      "shortcut": "ctrl+shift+c",
+      "show_output": true
+    },
+    {
+      "id": "idealg:docs",
+      "name": "IDEAlg Docs",
+      "description": "Abre documentação da skill",
+      "command": "cat ./.claude/skill-idealg-maintenance.md",
+      "category": "project",
+      "show_output": true
+    }
+  ],
+  "hooks": {
+    "on_session_start": {
+      "enabled": false,
+      "command": "./.claude/skill-validate-quick.sh",
+      "description": "Valida ao iniciar sessão"
+    },
+    "on_branch_change": {
+      "enabled": false,
+      "command": "git branch --show-current",
+      "description": "Mostra branch atual"
+    }
+  },
+  "project_info": {
+    "name": "IDEAlg",
+    "description": "IDE Web para Portugol — Educacional",
+    "framework": "Next.js 15",
+    "language": "TypeScript",
+    "repository": "https://github.com/hansufsm/IDEAlg"
+  },
+  "editor": {
+    "font_size": 14,
+    "tab_size": 2,
+    "auto_format": true,
+    "word_wrap": true
+  },
+  "permissions": {
+    "allow_bash": true,
+    "allow_git": true,
+    "allow_file_modifications": true,
+    "allow_package_manager": true
+  }
+}
