@@ -111,7 +111,13 @@ Veja [CONTRIBUTING.md](./CONTRIBUTING.md) para mais detalhes.
 
 ## 📄 Licença
 
-Este projeto está licenciado sob a **Licença MIT** — veja o arquivo [LICENSE](./LICENSE) para detalhes.
+Este projeto usa **duas licenças** para diferentes tipos de conteúdo:
+
+### Código-fonte
+O código-fonte está licenciado sob a **Licença MIT** — veja [LICENSE](./LICENSE) para detalhes. Você pode usar, modificar e distribuir livremente para fins comerciais e não-comerciais.
+
+### Documentação e Exemplos
+A documentação, exemplos e materiais educacionais estão licenciados sob **Creative Commons Attribution 4.0** (CC BY 4.0) — veja [LICENSE.CC](./LICENSE.CC) para detalhes. Você pode compartilhar e adaptar estes materiais desde que forneça atribuição apropriada.
 
 ---
 
