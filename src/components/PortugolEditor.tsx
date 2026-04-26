@@ -9,11 +9,17 @@ import {
 } from "portugol-interpreter";
 
 interface PortugolEditorProps {
+  /** Conteúdo atual do editor (código-fonte Portugol). */
   value: string;
+  /** Chamado a cada alteração de conteúdo pelo usuário. */
   onChange: (value: string) => void;
+  /** Conjunto de linhas com breakpoint ativo (1-based), sincronizado com o debugger. */
   breakpoints?: Set<number>;
+  /** Chamado ao clicar na margem de uma linha para alternar seu breakpoint. */
   onBreakpointToggle?: (line: number) => void;
+  /** Linha atualmente sendo executada no debug (highlight de cursor, 1-based). */
   currentLine?: number;
+  /** Desabilita edição (ex.: durante execução em modo read-only). */
   readOnly?: boolean;
 }
 

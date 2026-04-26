@@ -7,16 +7,52 @@ import { ProgramNode } from "../parser/ast";
 import { PortugolValue } from "../interpreter/environment";
 import { Interpreter, IOInterface, StepInfo } from "../interpreter/interpreter";
 
+/** Estado interno do ciclo de vida do debugger. */
 export type DebuggerState = "idle" | "running" | "paused" | "finished" | "error";
 
+/**
+ * Evento emitido pelo `PortugolDebugger` para os ouvintes registrados via `on()`.
+ *
+ * | `type`        | Quando ocorre |
+ * |---------------|---------------|
+ * | `step`        | Após cada instrução no modo step-into |
+ * | `breakpoint`  | Quando a execução atinge uma linha com breakpoint |
+ * | `output`      | A cada chamada a `escreva`/`escreval` |
+ * | `finished`    | Programa terminou normalmente |
+ * | `error`       | Erro de runtime ou sintaxe interrompeu a execução |
+ */
 export interface DebuggerEvent {
   type: "step" | "breakpoint" | "finished" | "error" | "output";
+  /** Linha do código-fonte (1-based) associada ao evento, quando aplicável. */
   line?: number;
+  /** Variáveis visíveis no escopo atual no momento do evento. */
   variables?: Record<string, PortugolValue>;
+  /** Texto produzido por `escreva`/`escreval` (apenas em eventos `output`). */
   output?: string;
+  /** Mensagem de erro (apenas em eventos `error`). */
   error?: string;
 }
 
+/**
+ * Debugger passo a passo para programas Portugol.
+ *
+ * Envolve o `Interpreter` e intercepta cada instrução para permitir:
+ * pausa em breakpoints, execução instrução a instrução (`stepInto`/`stepOver`),
+ * retomada contínua (`continue`) e inspeção de variáveis em tempo real.
+ *
+ * @example
+ * ```ts
+ * import { parse, PortugolDebugger } from "portugol-interpreter";
+ *
+ * const dbg = new PortugolDebugger({ write: console.log, read: () => "" });
+ * dbg.addBreakpoint(5);
+ * dbg.on((event) => {
+ *   if (event.type === "breakpoint") console.log("Parou na linha", event.line);
+ *   if (event.type === "finished") console.log("Concluído");
+ * });
+ * dbg.start(parse(source));
+ * ```
+ */
 export class PortugolDebugger {
   private interpreter: Interpreter;
   private state: DebuggerState = "idle";
