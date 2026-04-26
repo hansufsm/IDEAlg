@@ -3,8 +3,20 @@ import "./globals.css";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 
 export const metadata: Metadata = {
-  title: "IDEALG - IDE Portugol",
-  description: "Browser-based interpreter for Portugol pseudocode (VisuAlg compatible)",
+  title: "IDEAlg - IDE Online de Portugol",
+  description: "Aprenda lógica de programação com Portugol direto no navegador. IDE gratuita usada na UFSM.",
+  keywords: ["portugol", "algoritmos", "ufsm", "education", "ide", "programação"],
+  icons: {
+    icon: "/IDEAlg/favicon.svg",
+  },
+  openGraph: {
+    title: "IDEAlg - IDE Online de Portugol",
+    description: "Aprenda lógica de programação com Portugol direto no navegador.",
+    url: "https://hansufsm.github.io/IDEAlg",
+    siteName: "IDEAlg",
+    locale: "pt_BR",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
