@@ -10,6 +10,18 @@ import {
 } from "portugol-interpreter";
 import { ConsoleLine } from "@/components/IDEConsole";
 
+/**
+ * Fase atual do ciclo de vida da execução.
+ *
+ * | Valor       | Significado |
+ * |-------------|-------------|
+ * | `idle`      | Nenhuma execução em andamento |
+ * | `running`   | Execução normal em progresso |
+ * | `debug`     | Modo debug ativo, aguardando próximo passo |
+ * | `paused`    | Parado em breakpoint ou após step |
+ * | `finished`  | Execução concluída com sucesso |
+ * | `error`     | Execução encerrada por erro |
+ */
 export type RunMode =
   | "idle"
   | "running"
@@ -18,11 +30,15 @@ export type RunMode =
   | "finished"
   | "error";
 
+/** Snapshot do estado do debugger: linha atual e variáveis visíveis. */
 export interface DebugState {
+  /** Linha do código-fonte sendo executada (1-based). */
   currentLine: number;
+  /** Variáveis do escopo atual no momento da pausa. */
   variables: Record<string, PortugolValue>;
 }
 
+/** Projeto salvo no `localStorage`. */
 export interface Project {
   id: string;
   title: string;
@@ -31,7 +47,13 @@ export interface Project {
   updatedAt: number;
 }
 
+/**
+ * Prompt de entrada aguardando resposta do usuário (instrução `leia`).
+ * Enquanto este objeto estiver presente em `pendingInput`, a execução
+ * está suspensa esperando que `submitInput()` seja chamado.
+ */
 export interface InputPrompt {
+  /** ID único para forçar re-render quando o mesmo prompt é exibido novamente. */
   id: number;
   prompt: string;
   value: string;
@@ -63,6 +85,19 @@ function saveProjects(projects: Project[]): void {
   }
 }
 
+/**
+ * Hook central da IDE — gerencia todo o ciclo de vida de execução e depuração.
+ *
+ * Responsabilidades:
+ * - Execução normal via `run(code)` e depuração via `startDebug(code)`.
+ * - I/O assíncrono: `escreva` → `consoleLines`; `leia` → suspende execução
+ *   e aguarda `submitInput(value)`.
+ * - Controle de debug: `stepInto`, `stepOver`, `continueRun`, `stopDebug`.
+ * - Persistência de projetos no `localStorage` (CRUD completo).
+ * - Auto-save periódico do projeto corrente.
+ *
+ * @param initialCode Código carregado no editor ao montar o componente.
+ */
 export function usePortugolRunner(initialCode: string = "") {
   const [mode, setMode] = useState<RunMode>("idle");
   const [consoleLines, setConsoleLines] = useState<ConsoleLine[]>([]);

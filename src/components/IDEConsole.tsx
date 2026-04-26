@@ -2,15 +2,19 @@
 
 import { useEffect, useRef } from "react";
 
+/** Uma linha de saída no console da IDE. */
 export interface ConsoleLine {
+  /** Categoria visual: `output` = texto normal, `error` = vermelho, `info` = cinza, `input` = valor lido. */
   type: "output" | "error" | "info" | "input";
   text: string;
   timestamp?: number;
 }
 
 interface ConsoleProps {
+  /** Linhas a exibir, gerenciadas pelo `usePortugolRunner`. */
   lines: ConsoleLine[];
   onClear: () => void;
+  /** Se definido, exibe o tempo de execução no cabeçalho do console. */
   executionTimeMs?: number;
 }
 

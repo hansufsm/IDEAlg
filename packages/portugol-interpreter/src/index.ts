@@ -28,9 +28,23 @@ export type {
    PortugolRecord,
 } from "./interpreter/environment";
 
-// =============================================
-// Parse source code into AST
-// =============================================
+/**
+ * Transforma código-fonte Portugol em uma AST (`ProgramNode`).
+ *
+ * Executa Lexer + Parser. Lança `LexerError` ou `ParseError` em caso de
+ * erro de sintaxe — capture-os para exibir mensagens ao usuário.
+ *
+ * @param source Código-fonte Portugol completo (string UTF-8).
+ * @returns Raiz da AST pronta para ser passada a `Interpreter` ou `PortugolDebugger`.
+ * @throws {LexerError} Token inválido encontrado durante a tokenização.
+ * @throws {ParseError} Estrutura sintática inválida encontrada durante o parse.
+ *
+ * @example
+ * ```ts
+ * import { parse } from "portugol-interpreter";
+ * const ast = parse(`algoritmo "Oi"\ninicio\n  escreval("Olá!")\nfimalgoritmo`);
+ * ```
+ */
 export function parse(source: string): ProgramNode {
    const lexer = new Lexer(source);
    const tokens = lexer.tokenize();
@@ -38,9 +52,32 @@ export function parse(source: string): ProgramNode {
    return parser.parse();
 }
 
-// =============================================
-// Execute source code (full run)
-// =============================================
+/**
+ * Executa código-fonte Portugol de ponta a ponta (parse + interpretação).
+ *
+ * Nunca lança exceção — erros de sintaxe e de runtime são capturados e
+ * retornados em `ExecutionResult.error`. Use `io` para capturar saída ou
+ * fornecer entradas personalizadas (ex.: console do browser, testes unitários).
+ *
+ * @param source Código-fonte Portugol completo (string UTF-8).
+ * @param io     Implementação opcional de I/O. Se omitida, `write` acumula
+ *               em `ExecutionResult.output` e `read` usa `window.prompt`.
+ * @returns Objeto com `output` (texto impresso), `executionTimeMs` e,
+ *          opcionalmente, `error` (mensagem de erro se a execução falhou).
+ *
+ * @example
+ * ```ts
+ * import { execute } from "portugol-interpreter";
+ *
+ * const lines: string[] = [];
+ * const result = await execute(code, {
+ *   write: (text) => lines.push(text),
+ *   read: (_prompt) => "42",
+ * });
+ * if (result.error) console.error(result.error);
+ * else console.log(lines.join(""));
+ * ```
+ */
 export async function execute(
    source: string,
    io?: Partial<IOInterface>,
@@ -213,14 +250,17 @@ export const PORTUGOL_MONARCH_LANGUAGE = {
 // Example programs for seeding
 // =============================================
 
+/** Metadados de um programa de exemplo exibido na IDE. */
 export interface ExampleProgram {
    title: string;
    code: string;
    description: string;
    difficulty: "iniciante" | "intermediário" | "avançado";
+   /** Indica se o programa usa `leia` e, portanto, requer entrada do usuário. */
    hasInput: boolean;
 }
 
+/** Agrupamento de exemplos por tema para exibição categorizada na IDE. */
 export interface ExampleCategory {
    id: string;
    name: string;

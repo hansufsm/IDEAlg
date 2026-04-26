@@ -46,35 +46,63 @@ import {
 export type { PortugolValue } from "./environment";
 import { callBuiltin } from "./builtins";
 
-// =============================================
-// I/O interface (allows custom I/O in browser)
-// =============================================
+/**
+ * Contrato de I/O do interpretador.
+ *
+ * Implemente esta interface para redirecionar `escreva`/`escreval` e `leia`
+ * para qualquer destino (console do browser, testes, servidor Node, etc.).
+ *
+ * `read` pode retornar uma Promise para suportar entrada assíncrona no browser
+ * (ex.: exibir um prompt modal e aguardar o usuário digitar).
+ */
 export interface IOInterface {
   write(text: string): void;
   read(prompt: string): string | null | Promise<string | null>;
 }
 
-// =============================================
-// Execution result
-// =============================================
+/**
+ * Resultado devolvido por `execute()` ao término da execução.
+ *
+ * Se `error` estiver presente, a execução terminou com erro (de sintaxe ou
+ * runtime). O campo `output` contém tudo que foi escrito antes do erro.
+ */
 export interface ExecutionResult {
+  /** Texto acumulado de todas as chamadas a `escreva`/`escreval`. */
   output: string;
+  /** Mensagem de erro, se a execução terminou com falha. */
   error?: string;
+  /** Tempo total de execução em milissegundos. */
   executionTimeMs: number;
 }
 
-// =============================================
-// Step information (for debugger)
-// =============================================
+/**
+ * Snapshot do estado de execução em um determinado passo.
+ * Emitido pelo `PortugolDebugger` a cada evento `step` ou `breakpoint`.
+ */
 export interface StepInfo {
+  /** Número da linha do código-fonte sendo executada (1-based). */
   line: number;
+  /** Mapa de todas as variáveis visíveis no escopo atual. */
   variables: Record<string, PortugolValue>;
+  /** Saída acumulada até este passo. */
   output: string;
 }
 
-// =============================================
-// Interpreter class
-// =============================================
+/**
+ * Interpretador tree-walker do Portugol.
+ *
+ * Percorre a AST produzida pelo `Parser` e executa cada nó diretamente,
+ * sem geração de bytecode intermediário. Gerencia escopos léxicos via
+ * `Environment`, resolve chamadas de função/procedimento e delega
+ * funções nativas ao módulo `builtins`.
+ *
+ * Uso típico (via API pública de `index.ts`):
+ * ```ts
+ * const ast = parse(source);
+ * const interp = new Interpreter({ write: console.log, read: () => "42" });
+ * await interp.execute(ast);
+ * ```
+ */
 export class Interpreter {
   private globalEnv: Environment = new Environment();
   private procedures: Map<string, ProcedureNode> = new Map();
